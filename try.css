@@ -1,0 +1,187 @@
+
+body {
+  background-color: #f0f0f0;
+}
+
+
+/* #video-container {
+    width: 100%;
+    text-align: center;
+} */
+#video {
+    width: 100%;
+    max-width: 600px;
+}
+#result {
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+#qrFileInput {
+    display: none;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 40%;
+    border-radius: 10px;
+
+    
+  }
+  
+  /* Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+position: absolute;
+top: 220px;
+right: 420px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
+
+  .ride-details {
+
+   text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+
+
+  .list-item {
+    white-space: pre-wrap;
+    /* Add other styling properties as needed */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+#idListContainer {
+  margin-top: -30px;
+}
+
+#report {
+  display: block; /* Ensure the button is treated as a block element */
+  margin: 0 auto; /* Center the button horizontally */
+  margin-top: 20px; /* Adjust margin as needed */
+  padding: 10px 20px 10px 20px;
+  background-color: #ffd702;
+  border-width: 0;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#report:hover,
+#report:active {
+  background-color: #f7d931;
+
+  color: rgb(59, 59, 59);
+
+}
+
+
+#doneBtn {
+  display: none;
+}
+
+.start-btn {
+  width: 150px; 
+  height: 150px;
+  background-image: url('images/sscan.png');
+  background-size: cover;
+  border: none; 
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#stopBtn {
+  border-radius: 10px;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px 10px 20px;
+  background-color: #ffd702;
+  border-width: 0;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+
+}
+
+#stopBtn:hover,
+#stopBtn:active {
+    background-color: black; /* Change background color on hover and click */
+    color: #ffd702;
+}
+
+#video-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+
+ 
+ 
+  width: 280px;
+  
+}
+
+
+#datetimeContainer {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 20px;
+  font-size: 20px;
+  color: #555;
+  position: absolute;
+ bottom: 10px;
+left: 30px;
+}
