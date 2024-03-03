@@ -493,7 +493,7 @@ function scanQRCode() {
                                             // Make the list item clickable
                                             listItem.style.cursor = 'pointer';
                                             // listItem.textContent = `ID: ${doc.id}, Name: ${name}, Plate Number: ${plateNumber}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}, Pickup Point: ${doc.data().pickupPoint}, Drop-off Point: ${doc.data().dropOffPoint}, Requested By: ${doc.data().requestBy}, Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-                                            listItem.innerHTML = `ID: ${doc.id},<br>Driver Name: ${name}<br>Plate Number: ${plateNumber}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br>Requester's Contact Number: ${doc.data().requestByContactNumber}`;
+                                            listItem.innerHTML = `ID: ${doc.id},<br>Driver Name: ${name}<br>Plate Number: ${plateNumber}<br>Time requested: ${doc.data().timeRequested}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br>Requester's Contact Number: ${doc.data().requestByContactNumber}`;
                                             listItem.classList.add('list-item');
 
                                             // Add click event to display more details if needed
@@ -541,6 +541,8 @@ function scanQRCode() {
         scan();
     });
 }
+
+
 
 
 
@@ -629,11 +631,13 @@ function handleReportButtonClick() {
          const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/);
         //  const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: (.+?)<br>/);
          const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: \+(\d+)/);
+         const timeRequestedMatch = listItem.innerHTML.match(/Time requested: (.+?)<br>/); // Extracting the Time requested
+         const timeAcceptedMatch = listItem.innerHTML.match(/Time Accepted: (.+?)<br>/); // Extracting the Time accepted
 
          console.log("Contact Number Match:", requesterContactMatch);
          console.log("List Item HTML:", listItem.innerHTML);
          
-        if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch) {
+        if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch && timeRequestedMatch && timeAcceptedMatch) {
             const id = idMatch[1];
             const driverName = driverNameMatch[1];
             const driverPlateNumber = driverPlateNumberMatch[1];
@@ -641,6 +645,8 @@ function handleReportButtonClick() {
             const pickupPoint = pickupPointMatch[1];
             const dropOffPoint = dropOffPointMatch[1];
             const requesterContactNumber = requesterContactMatch[1];
+            const timeRequested = timeRequestedMatch[1];
+            const timeAccepted = timeAcceptedMatch[1];
 
             // Ask for confirmation before reporting
             const confirmed = confirm(`Are you sure you want to report ID: ${id} as a fake booking?`);
@@ -677,7 +683,9 @@ function handleReportButtonClick() {
                             dropOffPoint: dropOffPoint,
                             driverPlateNumber: driverPlateNumber,
                             // requestByContactNumber: requesterContactNumber
-                            requestByContactNumber: "+" + requesterContactNumber
+                            requestByContactNumber: "+" + requesterContactNumber,
+                            timeRequested: timeRequested,
+                            timeAccepted: timeAccepted
 
                         });
                     })
