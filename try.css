@@ -1,6 +1,7 @@
 
 body {
   background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
 }
 
 
@@ -120,7 +121,7 @@ right: 420px;
 .start-btn {
   width: 150px; 
   height: 150px;
-  background-image: url('images/sscan.png');
+  background-image: url('images/scanned.png');
   background-size: cover;
   border: none; 
   cursor: pointer;
@@ -180,8 +181,28 @@ right: 420px;
   margin-top: 10px;
   margin-right: 20px;
   font-size: 20px;
-  color: #555;
+  color: #000000;
   position: absolute;
- bottom: 10px;
-left: 30px;
+ top: 50px;
+ left: 30px;
+ font-size: 25px;
+ font-weight: bold;
+}
+
+
+.no-ride-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  font-size: 50px;
+  padding-right: 40px;
+  padding-top: 60px;
+}
+
+
+
+#fullscreenBtn, #fullscreenImg {
+  position: absolute;
+  top: 50px;
+  right: 30px;
 }
