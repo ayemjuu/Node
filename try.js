@@ -56,387 +56,6 @@ window.addEventListener('click', event => {
 });
 
 
-//   function scanQRCode() {
-//       const canvas = document.createElement('canvas');
-//       const context = canvas.getContext('2d');
-
-//       video.addEventListener('loadedmetadata', function() {
-//           canvas.width = video.videoWidth;
-//           canvas.height = video.videoHeight;
-
-//           const scan = () => {
-//               if (video.readyState === video.HAVE_ENOUGH_DATA) {
-//                   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-//                   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//                   try {
-//                       const code = jsQR(imageData.data, imageData.width, imageData.height);
-//                       if (code) {
-//                           console.log('QR code detected:', code.data);
-//                           // Extracting and displaying only name and license plate number
-//                           const resultDiv = document.getElementById('result');
-//                           const parsedData = JSON.parse(code.data);
-//                           const name = parsedData.name;
-//                           const plateNumber = parsedData.plateNumber;
-//                           resultDiv.innerText = `Name: ${name} \plateNumber: ${plateNumber}`;
-//                              // Stop the camera
-//                         stopCamera();
-
-//                           // Displaying modal with scanned data
-//                         modalData.textContent = `Name: ${name}, Plate Number: ${plateNumber}`;
-//                         modal.style.display = 'block';
-
-//                         // Close the modal when the close button is clicked
-//                         const closeModal = document.getElementsByClassName('close')[0];
-//                         closeModal.onclick = function() {
-//                             modal.style.display = 'none';
-//                         };
-
-//                         // Close the modal when the user clicks outside of it
-//                         window.onclick = function(event) {
-//                             if (event.target == modal) {
-//                                 modal.style.display = 'none';
-//                             }
-//                         };
-
-// // Displaying modal with scanned data and IDs
-// modalData.innerHTML = `Name: ${name}, Plate Number: ${plateNumber}<br><br><strong>IDs:</strong><div id="idListContainer" style="max-height: 200px; overflow-y: auto;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-
-// // Query Firestore to get IDs based on name and plate number
-// db.collection('acceptedRequest')
-//     .where('driverName', '==', name)
-//     .where('driverPlateNumber', '==', plateNumber)
-//     .get()
-//     .then(querySnapshot => {
-//         const idList = document.getElementById('idList');
-//         idList.innerHTML = ''; // Clear the list before adding filtered items
-//         querySnapshot.forEach(doc => {
-//             const id = doc.id;
-//             const driverName = doc.data().driverName;
-//             const timeAccepted = doc.data().timeAccepted;
-//             const formattedTimeAccepted = formatTimestamp(timeAccepted);
-//             const listItem = document.createElement('li');
-//             // Make the list item clickable
-//             listItem.style.cursor = 'pointer';
-//             // listItem.textContent = `ID: ${id}, Driver Name: ${driverName}, Time Accepted: ${formattedTimeAccepted}`;
-//             listItem.textContent = `Time Accepted: ${formattedTimeAccepted}`;
-
-//             // Add click event to display more details if needed
-//             listItem.addEventListener('click', () => {
-//                 // You can define your logic here to display more details when clicked
-//                 console.log(`Clicked ID: ${id}`);
-//             });
-//             idList.appendChild(listItem);
-//         });
-//     })
-//     .catch(error => {
-//         console.error('Error getting documents: ', error);
-//     });
-
-//         // Display the modal
-//         modal.style.display = 'block';
-
-//                       }
-//                   } catch (error) {
-//                       console.error('Error decoding QR code:', error);
-//                   }
-//               }
-//               requestAnimationFrame(scan);
-//           };
-//           scan();
-//       });
-//   }
-
-
-// function scanQRCode() {
-//     const canvas = document.createElement('canvas');
-//     const context = canvas.getContext('2d');
-
-//     video.addEventListener('loadedmetadata', function() {
-//         canvas.width = video.videoWidth;
-//         canvas.height = video.videoHeight;
-
-//         const scan = () => {
-//             if (video.readyState === video.HAVE_ENOUGH_DATA) {
-//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-//                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//                 try {
-//                     const code = jsQR(imageData.data, imageData.width, imageData.height);
-//                     if (code) {
-//                         console.log('QR code detected:', code.data);
-//                         // Extracting and displaying only name and license plate number
-//                         const resultDiv = document.getElementById('result');
-//                         const parsedData = JSON.parse(code.data);
-//                         const name = parsedData.name;
-//                         const plateNumber = parsedData.plateNumber;
-//                         resultDiv.innerText = `Name: ${name} \plateNumber: ${plateNumber}`;
-//                         // Stop the camera
-//                         stopCamera();
-
-//                         // Displaying modal with scanned data
-//                         modalData.textContent = `Name: ${name}, Plate Number: ${plateNumber}`;
-//                         modal.style.display = 'block';
-
-//                         // Close the modal when the close button is clicked
-//                         const closeModal = document.getElementsByClassName('close')[0];
-//                         closeModal.onclick = function() {
-//                             modal.style.display = 'none';
-//                         };
-
-//                         // Close the modal when the user clicks outside of it
-//                         window.onclick = function(event) {
-//                             if (event.target == modal) {
-//                                 modal.style.display = 'none';
-//                             }
-//                         };
-
-//                         // Displaying modal with scanned data and IDs
-//                         modalData.innerHTML = `Name: ${name}, Plate Number: ${plateNumber}<br><br><strong>IDs:</strong><div id="idListContainer" style="max-height: 200px; overflow-y: auto;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-
-//                         // Get the current date
-//                         const currentDate = new Date();
-//                         const currentDay = currentDate.getDate();
-
-//                         // Query Firestore to get IDs based on name and plate number
-//                         db.collection('acceptedRequest')
-//                             .where('driverName', '==', name)
-//                             .where('driverPlateNumber', '==', plateNumber)
-//                             .get()
-//                             .then(querySnapshot => {
-//                                 const idList = document.getElementById('idList');
-//                                 idList.innerHTML = ''; // Clear the list before adding filtered items
-//                                 querySnapshot.forEach(doc => {
-//                                     let timeAccepted = doc.data().timeAccepted;
-//                                     if (!(timeAccepted instanceof Date)) {
-//                                         timeAccepted = timeAccepted.toDate(); // Convert Firestore timestamp to JS Date object
-//                                     }
-//                                     const acceptedDay = timeAccepted.getDate();
-//                                     if (currentDay === acceptedDay) { // Filter items by day
-//                                         const formattedTimeAccepted = formatTimestamp(timeAccepted);
-//                                         const successful = doc.data().successful ? 'Successful' : 'Unsuccessful';
-//                                         const listItem = document.createElement('li');
-//                                         // Make the list item clickable
-//                                         listItem.style.cursor = 'pointer';
-//                                         // listItem.textContent = `ID: ${doc.id}, Driver Name: ${doc.data().driverName}, Time Accepted: ${formattedTimeAccepted}`;
-//                                         // listItem.textContent = `ID: ${doc.id}, Time Accepted: ${formattedTimeAccepted}`;
-//                                         // listItem.textContent = `ID: ${doc.id}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}`;
-//                                         listItem.textContent = `Name: ${name}, Plate Number: ${plateNumber}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}, Pickup Point: ${doc.data().pickupPoint}, Drop-off Point: ${doc.data().dropOffPoint}, Requested By: ${doc.data().requestBy}, Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-
-
-
-//                                         // Add click event to display more details if needed
-//                                         listItem.addEventListener('click', () => {
-//                                             // You can define your logic here to display more details when clicked
-//                                             console.log(`Clicked ID: ${doc.id}`);
-//                                         });
-//                                         idList.appendChild(listItem);
-//                                     }
-//                                 });
-//                             })
-//                             .catch(error => {
-//                                 console.error('Error getting documents: ', error);
-//                             });
-
-//                         // Display the modal
-//                         modal.style.display = 'block';
-
-//                     }
-//                 } catch (error) {
-//                     console.error('Error decoding QR code:', error);
-//                 }
-//             }
-//             requestAnimationFrame(scan);
-//         };
-//         scan();
-//     });
-// }
-
-
-//working siya ah pede mo palit to sa baba
-// function scanQRCode() {
-//     const canvas = document.createElement('canvas');
-//     const context = canvas.getContext('2d');
-
-//     video.addEventListener('loadedmetadata', function() {
-//         canvas.width = video.videoWidth;
-//         canvas.height = video.videoHeight;
-
-//         const scan = () => {
-//             if (video.readyState === video.HAVE_ENOUGH_DATA) {
-//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-//                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//                 try {
-//                     const code = jsQR(imageData.data, imageData.width, imageData.height);
-//                     if (code) {
-//                         console.log('QR code detected:', code.data);
-//                         // Extracting and displaying only name and license plate number
-//                         const resultDiv = document.getElementById('result');
-//                         const parsedData = JSON.parse(code.data);
-//                         const name = parsedData.name;
-//                         const plateNumber = parsedData.plateNumber;
-//                         // resultDiv.innerText = `Name: ${name} \plateNumber: ${plateNumber}`;
-//                         // Stop the camera
-//                         stopCamera();
-
-//                         // Displaying modal with scanned data and IDs
-                       
-//                         modalData.innerHTML = `<br><br><div id="idListContainer" style="max-height: 200px;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-//                         // modalData.innerHTML = `<br><br><div id="idListContainer" style="max-height: 200px; overflow-y: auto;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-                       
-//                         // modalData.innerHTML = `Name: ${name}, Plate Number: ${plateNumber}<br><br><div id="idListContainer" style="max-height: 200px; overflow-y: auto;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-
-//                         // Get the current date
-//                         const currentDate = new Date();
-//                         const currentDay = currentDate.getDate();
-
-//                         // Query Firestore to get IDs based on name and plate number
-//                         db.collection('acceptedRequest')
-//                             .where('driverName', '==', name)
-//                             .where('driverPlateNumber', '==', plateNumber)
-//                             .get()
-//                             .then(querySnapshot => {
-//                                 const idList = document.getElementById('idList');
-//                                 idList.innerHTML = ''; // Clear the list before adding filtered items
-//                                 querySnapshot.forEach(doc => {
-//                                     let timeAccepted = doc.data().timeAccepted;
-//                                     if (!(timeAccepted instanceof Date)) {
-//                                         timeAccepted = timeAccepted.toDate(); // Convert Firestore timestamp to JS Date object
-//                                     }
-//                                     const acceptedDay = timeAccepted.getDate();
-//                                     if (currentDay === acceptedDay) { // Filter items by day
-//                                         const formattedTimeAccepted = formatTimestamp(timeAccepted);
-//                                         const successful = doc.data().successful ? 'Successful' : 'Unsuccessful';
-//                                         if (successful === 'Unsuccessful') { // Check if the request was unsuccessful
-//                                             const listItem = document.createElement('li');
-//                                             // Make the list item clickable
-//                                             listItem.style.cursor = 'pointer';
-//                                             // listItem.textContent = `ID: ${doc.id}, Name: ${name}, Plate Number: ${plateNumber}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}, Pickup Point: ${doc.data().pickupPoint}, Drop-off Point: ${doc.data().dropOffPoint}, Requested By: ${doc.data().requestBy}, Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-//                                             listItem.innerHTML = `ID: ${doc.id},<br>Driver Name: ${name}<br>Plate Number: ${plateNumber}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br>Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-//                                             listItem.classList.add('list-item');
-
-//                                             // Add click event to display more details if needed
-//                                             listItem.addEventListener('click', () => {
-//                                                 // You can define your logic here to display more details when clicked
-//                                                 console.log(`Clicked ID: ${doc.id}`);
-//                                             });
-//                                             idList.appendChild(listItem);
-//                                         }
-//                                     }
-//                                 });
-//                             })
-//                             .catch(error => {
-//                                 console.error('Error getting documents: ', error);
-//                             });
-
-//                         // Display the modal
-//                         modal.style.display = 'block';
-
-//                     }
-//                 } catch (error) {
-//                     console.error('Error decoding QR code:', error);
-//                 }
-//             }
-//             requestAnimationFrame(scan);
-//         };
-//         scan();
-//     });
-// }
-
-//eto naman, may text nalalabas if alan pang ongoing ride yung nagscan
-// function scanQRCode() {
-//     const canvas = document.createElement('canvas');
-//     const context = canvas.getContext('2d');
-
-//     video.addEventListener('loadedmetadata', function() {
-//         canvas.width = video.videoWidth;
-//         canvas.height = video.videoHeight;
-
-//         const scan = () => {
-//             if (video.readyState === video.HAVE_ENOUGH_DATA) {
-//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-//                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//                 try {
-//                     const code = jsQR(imageData.data, imageData.width, imageData.height);
-//                     if (code) {
-//                         console.log('QR code detected:', code.data);
-//                         // Extracting and displaying only name and license plate number
-//                         const resultDiv = document.getElementById('result');
-//                         const parsedData = JSON.parse(code.data);
-//                         const name = parsedData.name;
-//                         const plateNumber = parsedData.plateNumber;
-//                         // resultDiv.innerText = `Name: ${name} \plateNumber: ${plateNumber}`;
-//                         // Stop the camera
-//                         stopCamera();
-
-//                         // Displaying modal with scanned data and IDs
-//                         modalData.innerHTML = `<br><br><div id="idListContainer" style="max-height: 200px;"><ul id="idList" style="list-style-type: none;"></ul></div>`;
-
-//                         // Get the current date
-//                         const currentDate = new Date();
-//                         const currentDay = currentDate.getDate();
-
-//                         // Query Firestore to get IDs based on name and plate number
-//                         db.collection('acceptedRequest')
-//                             .where('driverName', '==', name)
-//                             .where('driverPlateNumber', '==', plateNumber)
-//                             .get()
-//                             .then(querySnapshot => {
-//                                 const idList = document.getElementById('idList');
-//                                 idList.innerHTML = ''; // Clear the list before adding filtered items
-//                                 let found = false;
-//                                 querySnapshot.forEach(doc => {
-//                                     let timeAccepted = doc.data().timeAccepted;
-//                                     if (!(timeAccepted instanceof Date)) {
-//                                         timeAccepted = timeAccepted.toDate(); // Convert Firestore timestamp to JS Date object
-//                                     }
-//                                     const acceptedDay = timeAccepted.getDate();
-//                                     if (currentDay === acceptedDay) { // Filter items by day
-//                                         const formattedTimeAccepted = formatTimestamp(timeAccepted);
-//                                         const successful = doc.data().successful ? 'Successful' : 'Unsuccessful';
-//                                         if (successful === 'Unsuccessful') { // Check if the request was unsuccessful
-//                                             const listItem = document.createElement('li');
-//                                             // Make the list item clickable
-//                                             listItem.style.cursor = 'pointer';
-//                                             // listItem.textContent = `ID: ${doc.id}, Name: ${name}, Plate Number: ${plateNumber}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}, Pickup Point: ${doc.data().pickupPoint}, Drop-off Point: ${doc.data().dropOffPoint}, Requested By: ${doc.data().requestBy}, Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-//                                             listItem.innerHTML = `ID: ${doc.id},<br>Driver Name: ${name}<br>Plate Number: ${plateNumber}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br>Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-//                                             listItem.classList.add('list-item');
-
-//                                             // Add click event to display more details if needed
-//                                             listItem.addEventListener('click', () => {
-//                                                 // You can define your logic here to display more details when clicked
-//                                                 console.log(`Clicked ID: ${doc.id}`);
-//                                             });
-//                                             idList.appendChild(listItem);
-//                                             found = true;
-//                                         }
-//                                     }
-//                                 });
-//                                 if (!found) {
-//                                     // If no documents found, display "No ongoing Ride" message
-//                                     // idList.innerHTML = '<li>No ongoing Ride</li>';
-//                                     const noRideMessage = document.createElement('li');
-//                                     noRideMessage.textContent = 'You have no ongoing Ride';
-//                                     noRideMessage.classList.add('no-ride-message');
-//                                     idList.appendChild(noRideMessage);
-//                                 }
-//                             })
-//                             .catch(error => {
-//                                 console.error('Error getting documents: ', error);
-//                             });
-
-//                         // Display the modal
-//                         modal.style.display = 'block';
-
-//                     }
-//                 } catch (error) {
-//                     console.error('Error decoding QR code:', error);
-//                 }
-//             }
-//             requestAnimationFrame(scan);
-//         };
-//         scan();
-//     });
-// }
-
 
 function scanQRCode() {
     const canvas = document.createElement('canvas');
@@ -509,7 +128,7 @@ function scanQRCode() {
                                 if (!found) {
                                     // If no documents found, display "No ongoing Ride" message
                                     const noRideMessage = document.createElement('li');
-                                    noRideMessage.textContent = 'You have no ongoing Ride ;)';
+                                    noRideMessage.textContent = 'You have no ongoing Ride';
                                     noRideMessage.classList.add('no-ride-message');
                                     idList.appendChild(noRideMessage);
 
@@ -545,12 +164,12 @@ function scanQRCode() {
 
 
 
-
+//working ito kaso built in confirmation gamit
 
 //confirmation
 
-const reportButton = document.getElementById('report');
-reportButton.addEventListener('click', handleReportButtonClick);
+// const reportButton = document.getElementById('report');
+// reportButton.addEventListener('click', handleReportButtonClick);
 
 
 
@@ -564,12 +183,26 @@ reportButton.addEventListener('click', handleReportButtonClick);
 //         const driverNameMatch = listItem.innerHTML.match(/Driver Name: (.+?)<br>/); // Extracting the Driver Name
 //         const driverPlateNumberMatch = listItem.innerHTML.match(/Plate Number: (.+?)<br>/); // Extracting the Plate Number
 //         const requestByMatch = listItem.innerHTML.match(/Requested By: (.+?)<br>/); // Extracting the Requested By
+//          const pickupPointMatch = listItem.innerHTML.match(/Pickup Point: (.+?)<br>/); // Extracting the Pickup Point
+//          const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/);
+//         //  const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: (.+?)<br>/);
+//          const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: \+(\d+)/);
+//          const timeRequestedMatch = listItem.innerHTML.match(/Time requested: (.+?)<br>/); // Extracting the Time requested
+//          const timeAcceptedMatch = listItem.innerHTML.match(/Time Accepted: (.+?)<br>/); // Extracting the Time accepted
 
-//         if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch) {
+//          console.log("Contact Number Match:", requesterContactMatch);
+//          console.log("List Item HTML:", listItem.innerHTML);
+         
+//         if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch && timeRequestedMatch && timeAcceptedMatch) {
 //             const id = idMatch[1];
 //             const driverName = driverNameMatch[1];
 //             const driverPlateNumber = driverPlateNumberMatch[1];
 //             const requestBy = requestByMatch[1];
+//             const pickupPoint = pickupPointMatch[1];
+//             const dropOffPoint = dropOffPointMatch[1];
+//             const requesterContactNumber = requesterContactMatch[1];
+//             const timeRequested = timeRequestedMatch[1];
+//             const timeAccepted = timeAcceptedMatch[1];
 
 //             // Ask for confirmation before reporting
 //             const confirmed = confirm(`Are you sure you want to report ID: ${id} as a fake booking?`);
@@ -579,30 +212,48 @@ reportButton.addEventListener('click', handleReportButtonClick);
 
 //                 // Update the document in Firestore
 //                 db.collection('acceptedRequest').doc(id).update({
-//                     successful: true
-//                 })
-//                 .then(() => {
-//                     console.log(`Document with ID ${id} successfully updated.`);
+//                         successful: true
+//                     })
+//                     .then(() => {
+//                         console.log(`Document with ID ${id} successfully updated.`);
 
-//                     // Save the report data to Firestore
-//                     return db.collection('Report').add({
-//                         // id: id,
-//                         reportedBy: driverName,
-//                         // reporterPlateNumber: driverPlateNumber,
-//                         reported: requestBy,
-//                         timeReported: new Date(),
-//                         report: "Fake Booking",
+//                         // Save the report data to Firestore
+//                         return db.collection('Report').add({
+//                             reportedBy: driverName,
+//                             reported: requestBy,
+//                             timeReported: new Date(),
+//                             report: "Fake Booking",
+//                         });
+//                     })
+//                     .then((docRef) => {
+//                         console.log('Report data successfully saved to Firestore.');
+
+//                         // Save the report data to history collection
+//                         return db.collection('history').add({
+//                             reportId: docRef.id,
+//                             driverName: driverName,
+//                             requestBy: requestBy,
+//                             rideEnded: new Date(),
+//                             report: "Fake Booking",
+//                             pickupPoint: pickupPoint,
+//                             dropOffPoint: dropOffPoint,
+//                             driverPlateNumber: driverPlateNumber,
+//                             // requestByContactNumber: requesterContactNumber
+//                             requestByContactNumber: "+" + requesterContactNumber,
+//                             timeRequested: timeRequested,
+//                             timeAccepted: timeAccepted
+
+//                         });
+//                     })
+//                     .then(() => {
+//                         console.log('Report data successfully saved to history collection.');
+
+//                         // Close the modal
+//                         modal.style.display = 'none';
+//                     })
+//                     .catch(error => {
+//                         console.error(`Error updating document with ID ${id} or saving report data to Firestore:`, error);
 //                     });
-//                 })
-//                 .then(() => {
-//                     console.log('Report data successfully saved to Firestore.');
-
-//                     // Close the modal
-//                     modal.style.display = 'none'; 
-//                 })
-//                 .catch(error => {
-//                     console.error(`Error updating document with ID ${id} or saving report data to Firestore:`, error);
-//                 });
 //             } else {
 //                 // The user canceled, do nothing
 //                 console.log('Report canceled by the user.');
@@ -617,103 +268,21 @@ reportButton.addEventListener('click', handleReportButtonClick);
 
 
 
-function handleReportButtonClick() {
-    // Find the list item corresponding to the scanned QR code
-    const listItem = document.querySelector('#idList li');
-
-    // Extract the ID, driverName, and driverPlateNumber from the list item
-    if (listItem) {
-        const idMatch = listItem.innerHTML.match(/ID: (\w+)/); // Extracting the ID using regular expression
-        const driverNameMatch = listItem.innerHTML.match(/Driver Name: (.+?)<br>/); // Extracting the Driver Name
-        const driverPlateNumberMatch = listItem.innerHTML.match(/Plate Number: (.+?)<br>/); // Extracting the Plate Number
-        const requestByMatch = listItem.innerHTML.match(/Requested By: (.+?)<br>/); // Extracting the Requested By
-         const pickupPointMatch = listItem.innerHTML.match(/Pickup Point: (.+?)<br>/); // Extracting the Pickup Point
-         const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/);
-        //  const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: (.+?)<br>/);
-         const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: \+(\d+)/);
-         const timeRequestedMatch = listItem.innerHTML.match(/Time requested: (.+?)<br>/); // Extracting the Time requested
-         const timeAcceptedMatch = listItem.innerHTML.match(/Time Accepted: (.+?)<br>/); // Extracting the Time accepted
-
-         console.log("Contact Number Match:", requesterContactMatch);
-         console.log("List Item HTML:", listItem.innerHTML);
-         
-        if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch && timeRequestedMatch && timeAcceptedMatch) {
-            const id = idMatch[1];
-            const driverName = driverNameMatch[1];
-            const driverPlateNumber = driverPlateNumberMatch[1];
-            const requestBy = requestByMatch[1];
-            const pickupPoint = pickupPointMatch[1];
-            const dropOffPoint = dropOffPointMatch[1];
-            const requesterContactNumber = requesterContactMatch[1];
-            const timeRequested = timeRequestedMatch[1];
-            const timeAccepted = timeAcceptedMatch[1];
-
-            // Ask for confirmation before reporting
-            const confirmed = confirm(`Are you sure you want to report ID: ${id} as a fake booking?`);
-            if (confirmed) {
-                // The user confirmed, proceed with the report
-                console.log(`Reported ID: ${id} for Driver Name: ${driverName}, Plate Number: ${driverPlateNumber}, and Requested By: ${requestBy}`);
-
-                // Update the document in Firestore
-                db.collection('acceptedRequest').doc(id).update({
-                        successful: true
-                    })
-                    .then(() => {
-                        console.log(`Document with ID ${id} successfully updated.`);
-
-                        // Save the report data to Firestore
-                        return db.collection('Report').add({
-                            reportedBy: driverName,
-                            reported: requestBy,
-                            timeReported: new Date(),
-                            report: "Fake Booking",
-                        });
-                    })
-                    .then((docRef) => {
-                        console.log('Report data successfully saved to Firestore.');
-
-                        // Save the report data to history collection
-                        return db.collection('history').add({
-                            reportId: docRef.id,
-                            driverName: driverName,
-                            requestBy: requestBy,
-                            rideEnded: new Date(),
-                            report: "Fake Booking",
-                            pickupPoint: pickupPoint,
-                            dropOffPoint: dropOffPoint,
-                            driverPlateNumber: driverPlateNumber,
-                            // requestByContactNumber: requesterContactNumber
-                            requestByContactNumber: "+" + requesterContactNumber,
-                            timeRequested: timeRequested,
-                            timeAccepted: timeAccepted
-
-                        });
-                    })
-                    .then(() => {
-                        console.log('Report data successfully saved to history collection.');
-
-                        // Close the modal
-                        modal.style.display = 'none';
-                    })
-                    .catch(error => {
-                        console.error(`Error updating document with ID ${id} or saving report data to Firestore:`, error);
-                    });
-            } else {
-                // The user canceled, do nothing
-                console.log('Report canceled by the user.');
-            }
-        } else {
-            console.log('Failed to extract necessary information from the QR code data.');
-        }
-    } else {
-        console.log('No scanned QR code data available to report.');
-    }
-}
+//end nung buil;t-in confirmation
 
 
+//di na siya buil-in confirmation
 
+// const reportButton = document.getElementById('report');
+// const confirmationModal = document.getElementById('confirmationModal');
+// const confirmReportButton = document.getElementById('confirmReport');
+// const cancelReportButton = document.getElementById('cancelReport');
+
+// reportButton.addEventListener('click', handleReportButtonClick);
 
 // function handleReportButtonClick() {
+
+
 //     // Find the list item corresponding to the scanned QR code
 //     const listItem = document.querySelector('#idList li');
 
@@ -722,26 +291,50 @@ function handleReportButtonClick() {
 //         const idMatch = listItem.innerHTML.match(/ID: (\w+)/); // Extracting the ID using regular expression
 //         const driverNameMatch = listItem.innerHTML.match(/Driver Name: (.+?)<br>/); // Extracting the Driver Name
 //         const driverPlateNumberMatch = listItem.innerHTML.match(/Plate Number: (.+?)<br>/); // Extracting the Plate Number
+//         const requestByMatch = listItem.innerHTML.match(/Requested By: (.+?)<br>/); // Extracting the Requested By
 //         const pickupPointMatch = listItem.innerHTML.match(/Pickup Point: (.+?)<br>/); // Extracting the Pickup Point
+//         const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/); // Extracting the Drop-off Point
+//         const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: \+(\d+)/); // Extracting the Requester's Contact Number
+//         const timeRequestedMatch = listItem.innerHTML.match(/Time requested: (.+?)<br>/); // Extracting the Time requested
+//         const timeAcceptedMatch = listItem.innerHTML.match(/Time Accepted: (.+?)<br>/); // Extracting the Time accepted
 
-//         if (idMatch && driverNameMatch && driverPlateNumberMatch && pickupPointMatch) {
+//         if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch && timeRequestedMatch && timeAcceptedMatch) {
 //             const id = idMatch[1];
 //             const driverName = driverNameMatch[1];
 //             const driverPlateNumber = driverPlateNumberMatch[1];
+//             const requestBy = requestByMatch[1];
 //             const pickupPoint = pickupPointMatch[1];
+//             const dropOffPoint = dropOffPointMatch[1];
+//             const requesterContactNumber = requesterContactMatch[1];
+//             const timeRequested = timeRequestedMatch[1];
+//             const timeAccepted = timeAcceptedMatch[1];
 
-//             // Ask for confirmation before reporting
-//             const confirmed = confirm(`Are you sure you want to report ID: ${id} as a fake booking?`);
-//             if (confirmed) {
-//                 // The user confirmed, proceed with the report
-//                 console.log(`Reported ID: ${id} for Driver Name: ${driverName}, Plate Number: ${driverPlateNumber}, Pickup Point: ${pickupPoint}, Drop-off Point: ${dropOffPoint}, and Requester's Contact Number: ${requestByContactNumber}`);
+//             // Show the confirmation modal
+//             confirmationModal.style.display = 'block';
 
-//                 // Save the report data to Firestore
-//                 db.collection('Report').add({
-//                     reportedBy: driverName,
-//                     reported: requestBy,
-//                     timeReported: new Date(),
-//                     report: "Fake Booking"
+//             // When the confirm button in the modal is clicked
+//             confirmReportButton.addEventListener('click', function () {
+//                 // Hide the modal
+//                 confirmationModal.style.display = 'none';
+//                 //   modal.style.display = 'none';
+
+//                 // Proceed with reporting
+//                 console.log(`Reported ID: ${id} for Driver Name: ${driverName}, Plate Number: ${driverPlateNumber}, and Requested By: ${requestBy}`);
+
+//                 // Update the document in Firestore
+//                 db.collection('acceptedRequest').doc(id).update({
+//                     successful: true
+//                 })
+//                 .then(() => {
+//                     console.log(`Document with ID ${id} successfully updated.`);
+
+//                     // Save the report data to Firestore
+//                     return db.collection('Report').add({
+//                         reportedBy: driverName,
+//                         reported: requestBy,
+//                         timeReported: new Date(),
+//                         report: "Fake Booking",
+//                     });
 //                 })
 //                 .then((docRef) => {
 //                     console.log('Report data successfully saved to Firestore.');
@@ -754,21 +347,30 @@ function handleReportButtonClick() {
 //                         rideEnded: new Date(),
 //                         report: "Fake Booking",
 //                         pickupPoint: pickupPoint,
+//                         dropOffPoint: dropOffPoint,
+//                         driverPlateNumber: driverPlateNumber,
+//                         requestByContactNumber: "+" + requesterContactNumber,
+//                         timeRequested: timeRequested,
+//                         timeAccepted: timeAccepted
 //                     });
 //                 })
 //                 .then(() => {
 //                     console.log('Report data successfully saved to history collection.');
-
-//                     // Close the modal
-//                     modal.style.display = 'none';
 //                 })
 //                 .catch(error => {
-//                     console.error(`Error saving report data to Firestore or history collection:`, error);
+//                     console.error(`Error updating document with ID ${id} or saving report data to Firestore:`, error);
 //                 });
-//             } else {
-//                 // The user canceled, do nothing
+//             });
+
+//             // When the cancel button in the modal is clicked
+//             cancelReportButton.addEventListener('click', function () {
+//                 // Hide the modal
+//                 confirmationModal.style.display = 'none';
+
+//                 // Log that the report was canceled
 //                 console.log('Report canceled by the user.');
-//             }
+//             });
+
 //         } else {
 //             console.log('Failed to extract necessary information from the QR code data.');
 //         }
@@ -776,71 +378,138 @@ function handleReportButtonClick() {
 //         console.log('No scanned QR code data available to report.');
 //     }
 // }
+//until here
 
 
 
+const reportButton = document.getElementById('report');
+const confirmationModal = document.getElementById('confirmationModal');
+const confirmReportButton = document.getElementById('confirmReport');
+const cancelReportButton = document.getElementById('cancelReport');
+
+// Add event listeners to confirm and cancel buttons outside the handleReportButtonClick function
+confirmReportButton.addEventListener('click', handleConfirmReportButtonClick);
+cancelReportButton.addEventListener('click', handleCancelReportButtonClick);
+
+let id, driverName, driverPlateNumber, requestBy, pickupPoint, dropOffPoint, requesterContactNumber, timeRequested, timeAccepted;
+
+// Function to handle confirm button click
+function handleConfirmReportButtonClick() {
+    // Hide the modal
+    confirmationModal.style.display = 'none';
+    modal.style.display = 'none';
 
 
-// function handleReportButtonClick() {
-//     // Find the list item corresponding to the scanned QR code
-//     const listItem = document.querySelector('#idList li');
+    // Proceed with reporting
+    console.log(`Reported ID: ${id} for Driver Name: ${driverName}, Plate Number: ${driverPlateNumber}, and Requested By: ${requestBy}`);
 
-//     // Extract the ID from the list item
-//     if (listItem) {
-//         const id = listItem.textContent.match(/ID: (\w+)/)[1]; // Extracting the ID using regular expression
+    // Update the document in Firestore
+    db.collection('acceptedRequest').doc(id).update({
+            successful: true
+        })
+        .then(() => {
+            console.log(`Document with ID ${id} successfully updated.`);
+
+            // Save the report data to Firestore
+            return db.collection('Report').add({
+                reportedBy: driverName,
+                reported: requestBy,
+                timeReported: new Date(),
+                report: "Fake Booking",
+            });
+        })
+
+
         
-//         // Ask for confirmation before reporting
-//         const confirmed = confirm(`Are you sure you want to report ID: ${id} as a fake booking?`);
-//         if (confirmed) {
-//             // Before updating the Firestore document, log all the data from the modal
-//             logModalData();
+        .then((docRef) => {
+            console.log('Report data successfully saved to Firestore.');
 
-//             // The user confirmed, proceed with the report
-//             console.log(`Reported ID: ${id}`);
-        
-//             // Update the document in Firestore
-//             db.collection('acceptedRequest').doc(id).update({
-//                 successful: true
-//             })
-//             .then(() => {
-//                 console.log(`Document with ID ${id} successfully updated.`);
+           
 
-//                 // Close the modal
-//                 modal.style.display = 'none'; 
-             
-//             })
-//             .catch(error => {
-//                 console.error(`Error updating document with ID ${id}:`, error);
-//             });
-//         } else {
-//             // The user canceled, do nothing
-//             console.log('Report canceled by the user.');
-//         }
-//     } else {
-//         console.log('No scanned QR code data available to report.');
-//     }
-// }
 
-// function logModalData() {
-//     // Assuming your modal content is within an element with id='modalData'
-//     const modalData = document.getElementById('modalData');
-//     if (modalData) {
-//         // console.log('Modal Data: ', modalData.innerHTML);
-//         // For better readability, if you want to log the data as text instead of HTML:
-//         console.log('Modal Data (Text): ', modalData.innerText);
-//     } else {
-//         console.log('No modal data found.');
-//     }
-// }
+            // Save the report data to history collection
+            return db.collection('history').add({
+                reportId: docRef.id,
+                driverName: driverName,
+                requestBy: requestBy,
+                rideEnded: new Date(),
+                report: "Fake Booking",
+                pickupPoint: pickupPoint,
+                dropOffPoint: dropOffPoint,
+                driverPlateNumber: driverPlateNumber,
+                requestByContactNumber: "+" + requesterContactNumber,
+                timeRequested: timeRequested,
+                timeAccepted: timeAccepted,
+
+                // timeAccepted: formattedTimeAccepted,
+            });
+        })
+        .then(() => {
+            console.log('Report data successfully saved to history collection.');
+            console.log('Value of timeAccepted:', timeAccepted); 
+        })
+        .catch(error => {
+            console.error(`Error updating document with ID ${id} or saving report data to Firestore:`, error);
+        });
+}
 
 
 
+// Function to handle cancel button click
+function handleCancelReportButtonClick() {
+    // Hide the modal
+    confirmationModal.style.display = 'none';
+
+
+    // Log that the report was canceled
+    console.log('Report canceled by the user.');
+}
+
+// Event listener for report button
+reportButton.addEventListener('click', handleReportButtonClick);
+
+// Function to handle report button click
+function handleReportButtonClick() {
+    // Find the list item corresponding to the scanned QR code
+    const listItem = document.querySelector('#idList li');
+
+    // Extract the ID, driverName, and driverPlateNumber from the list item
+    if (listItem) {
+        const idMatch = listItem.innerHTML.match(/ID: (\w+)/); // Extracting the ID using regular expression
+        const driverNameMatch = listItem.innerHTML.match(/Driver Name: (.+?)<br>/); // Extracting the Driver Name
+        const driverPlateNumberMatch = listItem.innerHTML.match(/Plate Number: (.+?)<br>/); // Extracting the Plate Number
+        const requestByMatch = listItem.innerHTML.match(/Requested By: (.+?)<br>/); // Extracting the Requested By
+        const pickupPointMatch = listItem.innerHTML.match(/Pickup Point: (.+?)<br>/); // Extracting the Pickup Point
+        const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/); // Extracting the Drop-off Point
+        const requesterContactMatch = listItem.innerHTML.match(/Requester's Contact Number: \+(\d+)/); // Extracting the Requester's Contact Number
+        const timeRequestedMatch = listItem.innerHTML.match(/Time requested: (.+?)<br>/); // Extracting the Time requested
+        const timeAcceptedMatch = listItem.innerHTML.match(/Time Accepted: (.+?)<br>/); // Extracting the Time accepted
+
+        if (idMatch && driverNameMatch && driverPlateNumberMatch && requestByMatch && pickupPointMatch && dropOffPointMatch && requesterContactMatch && timeRequestedMatch && timeAcceptedMatch) {
+            id = idMatch[1];
+            driverName = driverNameMatch[1];
+            driverPlateNumber = driverPlateNumberMatch[1];
+            requestBy = requestByMatch[1];
+            pickupPoint = pickupPointMatch[1];
+            dropOffPoint = dropOffPointMatch[1];
+            requesterContactNumber = requesterContactMatch[1];
+            timeRequested = timeRequestedMatch[1];
+            timeAccepted = timeAcceptedMatch[1];
+          
+
+            // Show the confirmation modal
+            confirmationModal.style.display = 'block';
+        } else {
+            console.log('Failed to extract necessary information from the QR code data.');
+        }
+    } else {
+        console.log('No scanned QR code data available to report.');
+    }
+}
 
 
 
-
-
-
+//hehe
   function loadQRFile(event) {
       const file = event.target.files[0];
       if (file) {
@@ -891,13 +560,26 @@ function handleReportButtonClick() {
 
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyDjBboCs4iqBnogiInGpHcVvCEDBGokiLU",
-    authDomain: "thero-28f02.firebaseapp.com",
-    projectId: "thero-28f02",
-    storageBucket: "thero-28f02.appspot.com",
-    messagingSenderId: "394557839181",
-    appId: "1:394557839181:web:53a1bf1d15264d3ab74904",
-    measurementId: "G-MB5NB4LDS3"
+
+    //TodaHero
+    // apiKey: "AIzaSyDjBboCs4iqBnogiInGpHcVvCEDBGokiLU",
+    // authDomain: "thero-28f02.firebaseapp.com",
+    // projectId: "thero-28f02",
+    // storageBucket: "thero-28f02.appspot.com",
+    // messagingSenderId: "394557839181",
+    // appId: "1:394557839181:web:53a1bf1d15264d3ab74904",
+    // measurementId: "G-MB5NB4LDS3"
+
+    //THero
+    apiKey: "AIzaSyAsg1oW1wpZXUcZo0UcFZ57qYWBAJHfasY",
+    authDomain: "todahero-4e7c0.firebaseapp.com",
+    projectId: "todahero-4e7c0",
+    storageBucket: "todahero-4e7c0.appspot.com",
+    messagingSenderId: "617421997910",
+    appId: "1:617421997910:web:aca4e6fc791b36393d38f7",
+    measurementId: "G-B2P699P8YS"
+
+
   };
   
   firebase.initializeApp(firebaseConfig);
@@ -1039,3 +721,34 @@ function toggleFullscreen() {
 
 // Event listener for the image click
 fullscreenImg.addEventListener('click', toggleFullscreen);
+
+
+
+
+
+
+// Get the modal element
+const fakeBookModal = document.getElementById('fakeBookModal');
+
+// Get the button that opens the modal
+// const reportButton = document.getElementById('report');
+
+// Get the <span> element that closes the modal
+const closeFakeBookModal = fakeBookModal.querySelector('.close');
+
+// When the user clicks the button, open the modal
+reportButton.addEventListener('click', function() {
+  fakeBookModal.style.display = 'block';
+});
+
+// When the user clicks on <span> (x), close the modal
+closeFakeBookModal.addEventListener('click', function() {
+  fakeBookModal.style.display = 'none';
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', function(event) {
+  if (event.target === fakeBookModal) {
+    fakeBookModal.style.display = 'none';
+  }
+});

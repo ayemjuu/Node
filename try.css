@@ -119,9 +119,9 @@ right: 420px;
 }
 
 .start-btn {
-  width: 150px; 
-  height: 150px;
-  background-image: url('images/scanned.png');
+  width: 350px; 
+  height: 350px;
+  background-image: url('images/QR.png');
   background-size: cover;
   border: none; 
   cursor: pointer;
@@ -191,7 +191,7 @@ right: 420px;
 
 
 .no-ride-message {
-  color: red;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   text-align: center;
   font-size: 50px;
@@ -206,3 +206,75 @@ right: 420px;
   top: 50px;
   right: 30px;
 }
+
+
+
+#fakeBookModal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.9); /* White with some transparency */
+}
+
+#fakeBookModal .modal-content {
+  background-color: #fefefe; /* White background */
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#fakeBookModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#fakeBookModal .close:hover,
+#fakeBookModal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+#nodetext {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 90px;
+}
+
+
+#confirmReport, #cancelReport {
+  background-color: #ffd702;
+  border-width: 0;
+  border-radius: 5px;
+  height:50px;
+  width: 100px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+
+
+}
+
+#confirmReport {
+
+
+  margin-right: 20px;
+  margin-left: 170px;
+
+  
+  }
+
