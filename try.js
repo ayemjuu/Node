@@ -110,9 +110,9 @@ function scanQRCode() {
                                         if (successful === 'Unsuccessful') { // Check if the request was unsuccessful
                                             const listItem = document.createElement('li');
                                             // Make the list item clickable
-                                            listItem.style.cursor = 'pointer';
+                                            // listItem.style.cursor = 'pointer';
                                             // listItem.textContent = `ID: ${doc.id}, Name: ${name}, Plate Number: ${plateNumber}, Time Accepted: ${formattedTimeAccepted}, Successful: ${successful}, Pickup Point: ${doc.data().pickupPoint}, Drop-off Point: ${doc.data().dropOffPoint}, Requested By: ${doc.data().requestBy}, Requester's Contact Number: ${doc.data().requestByContactNumber}`;
-                                            listItem.innerHTML = `ID: ${doc.id},<br>Driver Name: ${name}<br>Plate Number: ${plateNumber}<br>Time requested: ${doc.data().timeRequested}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br>Requester's Contact Number: ${doc.data().requestByContactNumber}`;
+                                            listItem.innerHTML = `<span class="hide">ID: ${doc.id}</span><br>Driver Name: ${name}<br>TODA Number: ${plateNumber}<br>Time requested: ${doc.data().timeRequested}<br>Time Accepted: ${formattedTimeAccepted}<br>Pickup Point: ${doc.data().pickupPoint}<br>Drop-off Point: ${doc.data().dropOffPoint}<br>Requested By: ${doc.data().requestBy}<br><span class="hide">Requester's Contact Number: ${doc.data().requestByContactNumber}</span>`;
                                             listItem.classList.add('list-item');
 
                                             // Add click event to display more details if needed
@@ -416,6 +416,8 @@ function handleConfirmReportButtonClick() {
                 reported: requestBy,
                 timeReported: new Date(),
                 report: "Fake Booking",
+                todaPlateNumber: driverPlateNumber,
+
             });
         })
 
@@ -444,6 +446,21 @@ function handleConfirmReportButtonClick() {
                 // timeAccepted: formattedTimeAccepted,
             });
         })
+
+        .then(() => {
+            console.log('Report data successfully saved to history collection.');
+                // Get current date and time
+            const currentDate = new Date();
+
+            // Save the priority data to the "Priority" collection
+            return db.collection('Priority').add({
+                driverName: driverName,
+                driverPlateNumber: driverPlateNumber,
+                date: currentDate // Add the current date
+            });
+        })
+
+
         .then(() => {
             console.log('Report data successfully saved to history collection.');
             console.log('Value of timeAccepted:', timeAccepted); 
@@ -477,7 +494,7 @@ function handleReportButtonClick() {
     if (listItem) {
         const idMatch = listItem.innerHTML.match(/ID: (\w+)/); // Extracting the ID using regular expression
         const driverNameMatch = listItem.innerHTML.match(/Driver Name: (.+?)<br>/); // Extracting the Driver Name
-        const driverPlateNumberMatch = listItem.innerHTML.match(/Plate Number: (.+?)<br>/); // Extracting the Plate Number
+        const driverPlateNumberMatch = listItem.innerHTML.match(/TODA Number: (.+?)<br>/); // Extracting the Plate Number
         const requestByMatch = listItem.innerHTML.match(/Requested By: (.+?)<br>/); // Extracting the Requested By
         const pickupPointMatch = listItem.innerHTML.match(/Pickup Point: (.+?)<br>/); // Extracting the Pickup Point
         const dropOffPointMatch = listItem.innerHTML.match(/Drop-off Point: (.+?)<br>/); // Extracting the Drop-off Point
@@ -694,7 +711,7 @@ function formatTimestamp(timestamp) {
 function updateDateTime() {
     const datetimeContainer = document.getElementById('datetimeContainer');
     const currentDate = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
     const formattedDateTime = currentDate.toLocaleDateString('en-US', options);
     datetimeContainer.textContent = formattedDateTime;
   }

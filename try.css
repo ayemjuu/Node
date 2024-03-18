@@ -95,7 +95,7 @@ right: 420px;
 #report {
   display: block; /* Ensure the button is treated as a block element */
   margin: 0 auto; /* Center the button horizontally */
-  margin-top: 20px; /* Adjust margin as needed */
+  margin-top: 30px; /* Adjust margin as needed */
   padding: 10px 20px 10px 20px;
   background-color: #ffd702;
   border-width: 0;
@@ -278,3 +278,12 @@ right: 420px;
   
   }
 
+
+  .hide {
+    display: none;
+  }
+  .list-item {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: black;
+    margin-top: -50px;
+  }
